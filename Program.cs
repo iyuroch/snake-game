@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-// using System.Random;
 using System.Threading;
 
 // TODO: make set from snake point
@@ -38,6 +37,7 @@ namespace snake
 
     class KeyPress
     {
+        // TODO: check eventhandler and eventhandler <TArg>
         public delegate void LeftMoveHandler();
         public event LeftMoveHandler LeftArrow;
 
@@ -136,7 +136,7 @@ namespace snake
 
         private void CheckFruit()
         {
-            if (this.snake.body.Find(this.fruit) != null)
+            if (this.snake.body.Contains(this.fruit))
             {
                 this.snake.GrowBody();
                 this.GenerateFruit();
@@ -224,12 +224,11 @@ namespace snake
 
         public static Point operator +(Point self, Point other) => new Point(self.x + other.x, self.y + other.y);
 
-        bool System.IEquatable<Point>.Equals(Point other) {
-            return this.x == other.x && this.y == other.y;
-        }
+        bool System.IEquatable<Point>.Equals(Point other) => this.x == other.x && this.y == other.y;
 
-        public String Debug() {
-            String s = "x: " + this.x.ToString() + " y: " + this.y.ToString();
+        public String Debug()
+        {
+            var s = $"x: {this.x} y: {this.y}";
             return s;
         }
 
